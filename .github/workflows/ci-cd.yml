@@ -1,0 +1,44 @@
+name: AeroMind CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+
+    - name: Install Backend Dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+
+
+    - name: Build Docker Images
+      run: |
+        docker compose build
+
+
+    - name: Run Containers
+      run: |
+        docker compose up -d
+
+
+    - name: Check Running Containers
+      run: |
+        docker ps
