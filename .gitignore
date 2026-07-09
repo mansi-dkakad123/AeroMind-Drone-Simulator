@@ -1,0 +1,15 @@
+### Backend
+backend/venv/
+backend/__pycache__/
+backend/routes/__pycache__/
+backend/instance/*.db
+*.pyc
+
+### Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+### OS / editor
+.DS_Store
+.vscode/
