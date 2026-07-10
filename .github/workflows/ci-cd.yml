@@ -35,19 +35,8 @@ jobs:
       - name: Push Docker Images
         run: docker compose push
 
-  # 👇 यहाँ से डिप्लॉयमेंट का नया ऑर्डर अपने आप जुड़ गया है
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build-test # यह पक्का करेगा कि पहले बिल्ड पास हो, तभी डिप्लॉय हो
+      - name: Trigger Render Backend Deploy
+        run: curl -X POST "${{ secrets.RENDER_BACKEND_DEPLOY_HOOK }}"
 
-    steps:
-      - name: Deploy to Cloud Server via SSH
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd /path/to/your/project/folder
-            docker compose pull
-            docker compose up -d --remove-orphans
+      - name: Trigger Render Frontend Deploy
+        run: curl -X POST "${{ secrets.RENDER_FRONTEND_DEPLOY_HOOK }}"
