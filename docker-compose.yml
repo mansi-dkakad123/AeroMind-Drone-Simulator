@@ -1,16 +1,16 @@
 version: "3.9"
 
 services:
-
   backend:
     build: ./backend
+    image: mansidhakad/project-backend:latest
     ports:
       - "5000:5000"
 
   frontend:
     build: ./frontend
+    image: mansidhakad/project-frontend:latest
     ports:
       - "5173:5173"
-
     depends_on:
       - backend
