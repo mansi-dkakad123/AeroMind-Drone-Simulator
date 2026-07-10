@@ -5,9 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    allowedHosts: [
-      "aeromind-drone-simulator-1.onrender.com"
-    ],
+    allowedHosts: true, // यहाँ स्ट्रिंग हटाकर सीधे true लिख दिया है
     proxy: {
       "/api": {
         target: "https://aeromind-drone-simulator.onrender.com",
